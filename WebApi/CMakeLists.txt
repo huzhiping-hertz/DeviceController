@@ -22,3 +22,4 @@ target_sources(${APP_NAME} PRIVATE
                ${MODEL_SRC})
 
 file(COPY ./web.json DESTINATION ${PROJECT_SOURCE_DIR}/bin/)
+file(COPY resources DESTINATION ${PROJECT_SOURCE_DIR}/bin/)

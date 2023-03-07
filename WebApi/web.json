@@ -55,7 +55,9 @@
             "xap",
             "apk",
             "cur",
-            "xml"
+            "xml",
+            "woff2",
+            "woff"
         ],
         // mime: A dictionary that extends the internal MIME type support. Maps extensions into new MIME types
         // note: This option only adds MIME to the sever. `file_types` above have to be set for the server to serve them.

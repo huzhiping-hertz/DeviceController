@@ -1,12 +1,15 @@
 #include "DeviceInformation.h"
 
-
-void DeviceInformation::asyncHandleHttpRequest(const HttpRequestPtr &req,
-                                           std::function<void(const HttpResponsePtr &)> &&callback)
+void DeviceInformation::GetInformation(const HttpRequestPtr &req,std::function<void (const HttpResponsePtr &)> &&callback)
 {
     auto para=req->getParameters();
     HttpViewData data;
-    data.insert("title","ListParameters");
-    auto resp=HttpResponse::newHttpViewResponse("BasicInfo.csp",data);
+    data.insert("title","Device Information");
+    auto resp=HttpResponse::newHttpViewResponse("DeviceInfo.csp",data);
     callback(resp);
+}
+
+void DeviceInformation::DeviceReboot(const HttpRequestPtr &req,std::function<void (const HttpResponsePtr &)> &&callback)
+{
+
 }

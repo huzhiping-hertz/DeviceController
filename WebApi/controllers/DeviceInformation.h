@@ -1,12 +1,16 @@
 #pragma once
-#include <drogon/HttpSimpleController.h>
+#include <drogon/HttpController.h>
 using namespace drogon;
-class DeviceInformation:public drogon::HttpSimpleController<DeviceInformation>
+class DeviceInformation:public drogon::HttpController<DeviceInformation>
 {
 public:
-    void asyncHandleHttpRequest(const HttpRequestPtr& req, std::function<void (const HttpResponsePtr &)> &&callback) override;
 
-    PATH_LIST_BEGIN
-    //PATH_ADD("/info");
-    PATH_LIST_END
+    METHOD_LIST_BEGIN
+    ADD_METHOD_TO(DeviceInformation::GetInformation,"/device/info",Get);
+    ADD_METHOD_TO(DeviceInformation::DeviceReboot,"/device/reboot",Post);
+    METHOD_LIST_END
+
+    void GetInformation(const HttpRequestPtr &req,std::function<void (const HttpResponsePtr &)> &&callback);
+
+    void DeviceReboot(const HttpRequestPtr &req,std::function<void (const HttpResponsePtr &)> &&callback);
 };
