@@ -1,0 +1,9 @@
+{
+    "version": 4,
+    "vendor": {
+        "conan": {}
+    },
+    "include": [
+        "/home/hz/work/RS/DeviceController/build/CMakePresets.json"
+    ]
+}
