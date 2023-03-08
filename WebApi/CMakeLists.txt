@@ -3,7 +3,7 @@ set(APP_NAME "WebApi")
 file(GLOB_RECURSE cpp_files "*.cpp")
 
 add_executable(${APP_NAME} main.cpp)
-target_link_libraries(${APP_NAME} nlohmann_json::nlohmann_json Drogon::Drogon)
+target_link_libraries(${APP_NAME} nlohmann_json::nlohmann_json Drogon::Drogon Poco::Net OSMonitor)
 
 aux_source_directory(controllers CTL_SRC)
 aux_source_directory(filters FILTER_SRC)

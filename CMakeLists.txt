@@ -23,6 +23,6 @@ file(COPY ${PROJECT_SOURCE_DIR}/config.txt DESTINATION ${PROJECT_SOURCE_DIR}/bin
 
 #项目源码
 add_subdirectory(CommonUtility)
-#add_subdirectory(DomainModel)
+add_subdirectory(OSMonitor)
 add_subdirectory(WebApi)
 add_subdirectory(UnitTest)

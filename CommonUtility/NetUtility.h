@@ -5,7 +5,7 @@
 #include <string>
 #include <map>
 
-namespace RM
+namespace RS
 {
 	using namespace std;
 

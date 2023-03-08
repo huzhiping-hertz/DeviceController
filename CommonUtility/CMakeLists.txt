@@ -1,4 +1,4 @@
-﻿set(utility_library_name "CommonUtility")
-file(GLOB UTILITY_SRCS "*.cpp")
-add_library(${utility_library_name} STATIC ${UTILITY_SRCS})
-target_link_libraries(${utility_library_name}  Poco::Poco Poco::Foundation Poco::Net gflags::gflags)
+﻿set(library_name "CommonUtility")
+file(GLOB cpp_files "*.cpp")
+add_library(${library_name} STATIC ${cpp_files})
+target_link_libraries(${library_name}  Poco::Poco Poco::Foundation Poco::Net gflags::gflags)

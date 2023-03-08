@@ -10,7 +10,7 @@
 #include <map>
 #include <sstream>
 
-using namespace RM;
+using namespace RS;
 using namespace Poco::Net;
 using namespace Poco;
 
@@ -33,34 +33,31 @@ string NetUtility::PostRequest(string url, string body, map<string, string> head
     try
     {
         URI uri(url);
-        //HTTPClientSession session(uri.getHost(), uri.getPort());
-        HTTPClientSession session("127.0.0.1", 8011);
-        //string path(uri.getPathAndQuery());
-        //if (path.empty()) path = "/";
+        HTTPClientSession session(uri.getHost(), uri.getPort());
+        string path(uri.getPathAndQuery());
+        if (path.empty()) path = "/";
 
-        //HTTPRequest req(HTTPRequest::HTTP_POST, path, HTTPMessage::HTTP_1_1);
-        HTTPRequest req(HTTPRequest::HTTP_POST, "/api/v1.0", HTTPMessage::HTTP_1_1);
+        HTTPRequest req(HTTPRequest::HTTP_POST, path, HTTPMessage::HTTP_1_1);
         req.setContentType("application/json");
 
-        //for (map<string, string>::iterator it = headers.begin();
-        //    it != headers.end(); it++) {
-        //    req.set(it->first, it->second);
-        //}
+        for (map<string, string>::iterator it = headers.begin();
+           it != headers.end(); it++) {
+           req.set(it->first, it->second);
+        }
 
         req.setContentLength(body.length());
 
         std::ostream& os = session.sendRequest(req);
         os << body;  // sends the body
 
-        //HTTPResponse res;
-        //cout << res.getStatus() << " " << res.getReason() << endl;
+        HTTPResponse res;
+        cout << res.getStatus() << " " << res.getReason() << endl;
 
-        //istream& is = session.receiveResponse(res);
-        //stringstream ss;
-        //StreamCopier::copyStream(is, ss);
+        istream& is = session.receiveResponse(res);
+        stringstream ss;
+        StreamCopier::copyStream(is, ss);
 
-        //return ss.str();
-        return "";
+        return ss.str();
     }
     catch (Exception& ex)
     {

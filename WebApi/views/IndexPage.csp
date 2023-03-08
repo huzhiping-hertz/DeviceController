@@ -50,7 +50,7 @@
                             <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i
                                     class="bi bi-collection"></i></div>
                             <h2 class="fs-4 fw-bold">CPU</h2>
-                            <p class="mb-0">25%</p>
+                            <p class="mb-0"><div id="cpu">0</div></p>
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                         <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
                             <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i
                                     class="bi bi-cloud-download"></i></div>
-                            <h2 class="fs-4 fw-bold">磁盘</h2>
+                            <h2 class="fs-4 fw-bold"><div id="disk">10G</div></h2>
                             <p class="mb-0">20G</p>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                             <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i
                                     class="bi bi-card-heading"></i></div>
                             <h2 class="fs-4 fw-bold">内存</h2>
-                            <p class="mb-0">8G</p>
+                            <p class="mb-0"><div id="mem">0</div></p>
                         </div>
                     </div>
                 </div>
@@ -125,6 +125,13 @@
         $.get("/ip/get",function(data,status){
             ipInput.setIp(data["ipAddress"]);
             maskInput.setIp(data["subnetMask"]);
+        });
+
+        $.get("/device/info",function(data,status){
+            $("#cpu").text((data["cpu"]*100).toFixed(2)+"%");
+            $("#mem").text((data["mem"]*100).toFixed(2)+"%");
+            //$("#os").text(data["os"]);
+            //$("#kernel").text(data["kernel"]);
         });
 
         $("#btnChange").click(function () {

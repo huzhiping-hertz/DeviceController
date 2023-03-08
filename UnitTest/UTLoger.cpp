@@ -5,7 +5,7 @@
 #include "trantor/utils/AsyncFileLogger.h"
 
 
-using namespace RM;
+using namespace RS;
 using namespace nlohmann;
 
 TEST_CASE("LogConsole", "[LogConsole]")
