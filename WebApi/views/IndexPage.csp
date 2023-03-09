@@ -32,9 +32,9 @@
         <div class="container px-lg-5">
             <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
                 <div class="m-4 m-lg-5">
-                    <h1 class="display-5 fw-bold">QPS NMS 设备管理</h1>
+                    <h1 class="display-5 fw-bold">QPS NMS</h1>
                     <p class="fs-4"> </p>
-                    <a class="btn btn-primary btn-lg" href="#!">设备重启</a>
+                    <button type="button" id="btnReboot" class="btn btn-primary btn-lg">设备重启</button>
                 </div>
             </div>
         </div>
@@ -59,8 +59,8 @@
                         <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
                             <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i
                                     class="bi bi-cloud-download"></i></div>
-                            <h2 class="fs-4 fw-bold"><div id="disk">10G</div></h2>
-                            <p class="mb-0">20G</p>
+                            <h2 class="fs-4 fw-bold">Disk</h2>
+                            <p class="mb-0"><div id="disk">10G</div></p>
                         </div>
                     </div>
                 </div>
@@ -97,7 +97,6 @@
 
                             <div class="card-footer text-center">
                                 <button type="button" id="btnChange" class="btn btn-primary">修改地址</button>
-                                <button type="button" id="btnRebootNet" class="btn btn-primary">重启网卡</button>
                             </div>
                         </form>
                     </div>
@@ -126,13 +125,19 @@
             ipInput.setIp(data["ipAddress"]);
             maskInput.setIp(data["subnetMask"]);
         });
+        
+        function getInfo()
+        {
+            $.get("/device/info",function(data,status){
+                    $("#cpu").text((data["cpu"]*100).toFixed(2)+"%");
+                    $("#mem").text((data["mem"]*100).toFixed(2)+"%");
+                    $("#disk").text(data["disk"]);
+                    //$("#os").text(data["os"]);
+                    //$("#kernel").text(data["kernel"]);
+            });
+        }
 
-        $.get("/device/info",function(data,status){
-            $("#cpu").text((data["cpu"]*100).toFixed(2)+"%");
-            $("#mem").text((data["mem"]*100).toFixed(2)+"%");
-            //$("#os").text(data["os"]);
-            //$("#kernel").text(data["kernel"]);
-        });
+        setInterval("getInfo()" ,3000);
 
         $("#btnChange").click(function () {
             $.post(
@@ -144,7 +149,21 @@
                 function (data, status) {
                     if(data["status"]=="success")
                         {
-                            alert("重启网卡后生效");
+                            alert("地址修改成功");
+                        }
+                }
+            );
+        });
+        $("#btnReboot").click(function () {
+            $.post(
+                "/device/reboot",
+                {
+                    device: 'monitor',
+                },
+                function (data, status) {
+                    if(data["status"]=="success")
+                        {
+                            alert("设备重启");
                         }
                 }
             );

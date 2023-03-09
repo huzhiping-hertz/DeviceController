@@ -13,4 +13,5 @@ public:
     void GetInformation(const HttpRequestPtr &req,std::function<void (const HttpResponsePtr &)> &&callback);
 
     void DeviceReboot(const HttpRequestPtr &req,std::function<void (const HttpResponsePtr &)> &&callback);
+    std::string RunCommand(std::string cmd);
 };
