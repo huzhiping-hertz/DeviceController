@@ -8,3 +8,13 @@ Release模式
 
 Debug模式
 5.conan install . -s build_type=Debug --build=missing
+
+
+webssh install & run
+pip3 instal webssh
+
+wssh
+
+webapi
+
+http://127.0.0.1:/8080
